@@ -11,7 +11,7 @@ export default function StudentWork() {
     <div>
       <h1>About Me</h1>
       <p>
-        Hi! My name is {name}. I'm {age} years old and excited to be learning
+        Hiya! My name is {name}. I'm {age} years old and excited to be learning
         React! I'm a freelance artist and I love to create art in my free time.
       </p>
 
