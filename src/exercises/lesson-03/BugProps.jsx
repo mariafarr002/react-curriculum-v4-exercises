@@ -11,12 +11,13 @@
 
   Use the commented "Explanation" section at the bottom of this lesson's components.
 */
+import { useState } from 'react';
 
 export default function BugProps({ name = 'friend' }) {
-  let message = 'Hello, ' + name;
+  const [message, setMessage] = useState('Hello, ' + name);
 
   function handleChange() {
-    message = 'Hi, ' + name + '!';
+    setMessage('Hi, ' + name + '!');
   }
 
   return (
@@ -29,3 +30,12 @@ export default function BugProps({ name = 'friend' }) {
 
 // Explanation:
 // (Write your explanation here)
+
+/*
+The issue with this componenet is that 'message' is not a recognized state in React.
+So 'message' inside the 'function handleChange' does not update nor render.
+React will only render when a state is changed.
+Having 'message' be stored in a state with 'useState' allows it to be updated with 'setMessage' so any changes can
+be tracked by React and render correctly.
+Also, using a variable with 'let' will not be tracked by React and therefore changes will not be displayed.
+*/
