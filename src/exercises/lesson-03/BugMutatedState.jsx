@@ -13,8 +13,7 @@ export default function BugMutatedState() {
   let [count, setCount] = useState(0);
 
   function handleAdd() {
-    count++;
-    setCount(count);
+    setCount((previous) => previous + 1);
   }
 
   return (
@@ -27,3 +26,10 @@ export default function BugMutatedState() {
 
 // Explanation:
 // (Write your explanation here)
+
+/*
+The issue here is that a React state should never be mutated directly. 
+This can lead to unexpected behavior and bugs in the code because it does not let React know to keep track of the changes internally. 
+It only changes the count locally.
+By taking the previous value and adding 1 to it, we can ensure that the state is updated correctly and consistently.
+*/
