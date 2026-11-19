@@ -1,13 +1,38 @@
 import './Lesson07Styles.css';
+import { getSinglePost } from './api';
+import { useState } from 'react';
 
 export default function FetchOnClick() {
+  const [clickPost, setClickPost] = useState();
+  const [loading, setLoading] = useState(false);
+
+  async function loadPost(id) {
+    try {
+      setLoading(true);
+      const data = await getSinglePost(id);
+      setClickPost(data);
+    } catch (error) {
+      console.log(error.message);
+      setClickPost();
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="root">
       <h1 className="heading">Fetch single post on click</h1>
-      <button type="button">Get post</button>
+      <button type="button" disabled={loading} onClick={() => loadPost(1)}>
+        Get post
+      </button>
+
       <div className="content">
-        TODO: Replace me with fetched data when the <code>Get post</code> button
-        is clicked
+        {clickPost && (
+          <>
+            <h2>{clickPost.title}</h2>
+            <p>{clickPost.body}</p>
+          </>
+        )}
       </div>
     </div>
   );
