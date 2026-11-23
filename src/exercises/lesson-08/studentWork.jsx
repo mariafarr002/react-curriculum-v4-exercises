@@ -10,7 +10,7 @@ import {
 import BookStats from './BookStats.jsx';
 import BookList from './BookList.jsx';
 import styles from './StudentWork.module.css';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 // Main Dashboard Component - Contains performance issues to be optimized
 export default function StudentWork() {
@@ -46,13 +46,14 @@ export default function StudentWork() {
   };
 
   // Filter books by search term and selected genres
-  let filteredBooks = bookData.filter(
-    (book) =>
-      book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      book.author.toLowerCase().includes(searchTerm.toLowerCase())
-  );
-
-  filteredBooks = filterBooksByGenre(filteredBooks, selectedGenres);
+  const filteredBooks = useMemo(() => {
+    const searchMatches = bookData.filter(
+      (book) =>
+        book.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        book.author.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    return filterBooksByGenre(searchMatches, selectedGenres);
+  }, [searchTerm, selectedGenres]);
 
   return (
     <div className={styles.dashboard}>

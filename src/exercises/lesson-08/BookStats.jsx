@@ -3,7 +3,7 @@ import {
   RenderCounter,
 } from '../../private/components/renderCounter.jsx';
 import styles from './BookStats.module.css';
-import { useMemo } from 'react';
+import { memo, useMemo } from 'react';
 
 // Book Statistics Component - Expensive calculations run unnecessarily
 function BookStats({ books }) {
@@ -133,4 +133,4 @@ function BookStats({ books }) {
   );
 }
 
-export default BookStats;
+export default memo(BookStats);
